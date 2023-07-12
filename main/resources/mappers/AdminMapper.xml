@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.AdminDao">
+    <select id="findAll" resultType="Admin">
+        select * from `admin`;
+    </select>
+    
+    <select id="findById" resultType="Admin">
+        select * from `admin` where adminId = #{id}
+    </select>
+    
+    <select id="findByIdAndPass" resultType="Admin">
+        select * from `admin` where adminid = #{adminId} and aPass = #{aPass}
+    </select>
+    
+    <insert id="addAdmin">
+        insert into `admin` (roleId,adminName,adminTel,aPass,adminHead,`state`) values (#{roleId},#{adminName},#{adminTel},#{aPass},#{adminHead},#{state});
+    </insert>
+    
+    <update id="updateAdminState">
+        update `admin` set state = #{state} where adminId = #{adminId};
+    </update>
+
+    <update id="updateAdmin">
+        update `admin` set adminName = #{adminName},adminTel= #{adminTel},adminHead= #{adminHead} where adminId =#{adminId};
+    </update>
+
+    <update id="updateAdminPass">
+        update `admin` set aPass = #{aPass} where adminId = #{adminId}
+    </update>
+</mapper>

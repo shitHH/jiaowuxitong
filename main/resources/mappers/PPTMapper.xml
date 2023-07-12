@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.PPTDao">
+    <select id="findByid" resultType="com.etc.vo.PPTVO">
+       SELECT ppt.`mid`,ppt.`photoid`,ppt.`pptid`,ppt.`pptname`,ppt.`pptsrc`,major.`mname`,ppt.`vsrc` FROM ppt,major WHERE ppt.`mid`=major.`mid` AND photoid=#{photoid}
+    </select>
+    <insert id="pptinsert">
+       INSERT INTO ppt(`mid`,pptsrc,photoid,pptname,vsrc) VALUES(#{mid},#{pptsrc},#{photoid},#{pptname},#{vsrc})
+    </insert>
+    <delete id="pptdatele">
+       DELETE FROM ppt WHERE pptid=#{pptid}
+    </delete>
+    <select id="findBypid" resultType="PPT">
+       SELECT * FROM ppt WHERE pptid=#{pptid}
+    </select>
+</mapper>

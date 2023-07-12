@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.MajorDao">
+    <select id="findAll" resultType="com.etc.vo.MajorVo">
+        select * from major,college where major.collid = college.collid
+    </select>
+    <select id="findById" resultType="com.etc.vo.MajorVo">
+        select * from major,college where mId = #{mId} and major.collid = college.collid
+    </select>
+    <select id="findByCollId" resultType="com.etc.vo.MajorVo">
+        select * from major,college where major.collId = #{collId} and major.collid = college.collid
+    </select>
+
+    <select id="findByCollName" resultType="com.etc.vo.MajorVo">
+        select * from major,college where collName = #{collName} and major.collid = college.collid
+    </select>
+
+    <insert id="addMajor">
+        insert into Major (collId,mName,mMoney)values (#{collId},#{mName},#{mMoney})
+    </insert>
+
+    <select id="checkName" resultType="Major">
+        select * from major where mname = #{name}
+    </select>
+
+    <update id="updateMajor">
+        update major set collid = #{collId} ,mname = #{mName},mmoney = #{mMoney}   where mid = #{mId};
+    </update>
+
+    <select id="findByName" resultType="com.etc.vo.MajorVo">
+        select * from major where mname like '%${name}%'
+    </select>
+</mapper>

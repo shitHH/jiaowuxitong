@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.ClassroomDao">
+    <select id="selectAll" resultType="Classroom">
+        select * from Classroom
+    </select>
+
+    <select id="selectByid" resultType="Classroom">
+        select * from Classroom where classroomid = #{classroomid}
+    </select>
+
+    <insert id="add">
+        insert into Classroom (cName) values (#{cName})
+    </insert>
+
+    <delete id="delete">
+        delete from Classroom where clasroomid in
+        <foreach collection="array" item="addressid" open="(" separator="," close=")">
+            #{clasroomid}
+        </foreach>
+    </delete>
+
+    <update id="update">
+        update Classroom set cname = #{cName} where Classroomid = #{classroomid}
+    </update>
+
+    <select id="checkClassroomName" resultType="Classroom">
+        select * from classroom where cname =#{name};
+    </select>
+
+    <select id="findByName" resultType="Classroom">
+        select * from classroom where cName like '%${name}%'
+    </select>
+</mapper>

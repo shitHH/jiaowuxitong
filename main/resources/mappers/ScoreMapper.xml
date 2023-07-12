@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.ScoreDao">
+    <select id="findAll" resultType="com.etc.vo.ScoreVO">
+        select * from Score,Student,lession ,class,grade,major,college where Score.sid = Student.sid and Score.lid = lession.lid and
+        class.gid = grade.gid and Student.cid = class.cid and class.mid = major.mid and major.collid = college.collid
+    </select>
+    <select id="findBySid" resultType="com.etc.vo.ScoreVO">
+        select * from Score,Student,lession ,class,grade,major,college where Score.sid = Student.sid and Score.lid = lession.lid and
+        class.gid = grade.gid and Student.cid = class.cid and class.mid = major.mid and major.collid = college.collid and score.sId = #{sId}
+    </select>
+    <select id="findByLid" resultType="com.etc.vo.ScoreVO">
+        select * from Score,Student,lession ,class,grade,major,college where Score.sid = Student.sid and Score.lid = lession.lid and
+        class.gid = grade.gid and Student.cid = class.cid and class.mid = major.mid and major.collid = college.collid and score.lId = #{lId}
+    </select>
+    <insert id="addScore">
+        insert into Score (sId,lId,score)values (#{sId},#{lId},#{score})
+    </insert>
+    <update id="updateScore">
+        update Score set sId = #{sId},lId = #{lId},score = #{score} where scoreId = #{scoreId}
+    </update>
+
+    <select id="findSame" resultType="Score">
+        select * from score where sid = #{sId} and lid = #{lId}
+    </select>
+</mapper>

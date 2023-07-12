@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.YiQingDao">
+    <select id="findAll" resultType="com.etc.vo.YiQingVo">
+     SELECT * FROM student,yiqing,grade,class,major,college WHERE student.`sid`=yiqing.`sid` AND student.`cid` = class.`cid` AND class.mid = major.`mid` AND major.`collid`=college.`collid`
+        AND class.`gid` = grade.`gid`
+    </select>
+    <select id="findBySid" resultType="com.etc.vo.YiQingVo">
+         SELECT * FROM student,yiqing,grade,class,major,college WHERE student.`sid`=yiqing.`sid` AND student.`cid` = class.`cid` AND class.mid = major.`mid` AND major.`collid`=college.`collid`
+        AND class.`gid` = grade.`gid`and student.`sid`=#{sid}
+    </select>
+    <select id="findByDate" resultType="com.etc.vo.YiQingVo">
+        SELECT * FROM student,yiqing,grade,class,major,college WHERE student.`sid`=yiqing.`sid` AND student.`cid` = class.`cid` AND class.mid = major.`mid` AND major.`collid`=college.`collid`
+        AND class.`gid` = grade.`gid`and yiqing.`date`= #{DATE}
+    </select>
+    <insert id="addYiQing">
+         insert into yiqing(sid,`date`,tiwen) values (#{sid},#{DATE},#{tiwen})
+    </insert>
+    <delete id="deleteYiQing">
+        delete from yiqing where sId=#{sId}
+    </delete>
+    <update id="updateYiQing">
+        update yiqing set tiwen=#{tiwen} where sid=#{sid}
+    </update>
+
+</mapper>

@@ -1,0 +1,28 @@
+server:
+  servlet:
+    context-path: /edu
+  port: 8080
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+    pathmatch:
+      use-suffix-pattern: false
+      use-registered-suffix-pattern: true
+    date-format: yyyy-MM-dd
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-bp1pxr3551ro70dqayo.mysql.rds.aliyuncs.com:3306/edu?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: edu0613
+    password: Edu0613123456
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 10240MB
+  data:
+    mongodb:
+      uri: mongodb://172.3.18.2:27017/edu
+mybatis:
+  mapper-locations: classpath:mappers/*.xml
+  type-aliases-package: com.etc.po

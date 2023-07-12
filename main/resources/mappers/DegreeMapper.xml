@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.DegreeDao">
+    <select id="selectAll" resultType="Degree">
+        select * from Degree
+    </select>
+
+    <select id="selectOne" resultType="Degree">
+        select * from Degree where degreeid = #{degreeid}
+    </select>
+
+    <insert id="add">
+        insert into Degree (degreename,dscore) values (#{degreename},#{dscore})
+    </insert>
+
+    <delete id="delete">
+        delete from Degree where degreeid in
+        <foreach collection="array" item="addressid" open="(" separator="," close=")">
+            #{degreeid}
+        </foreach>
+    </delete>
+
+    <update id="update">
+        update Degree set degreename = #{degreename} where degreeid = #{degreeid}
+    </update>
+</mapper>

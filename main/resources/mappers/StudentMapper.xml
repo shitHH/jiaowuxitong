@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.StudentDao">
+    <select id="findAll" resultType="com.etc.vo.StudentVO">
+    SELECT * FROM student,grade,class,major,college
+    WHERE student.`cid` = class.`cid` AND class.mid = major.`mid` AND major.`collid`=college.`collid`
+        AND class.`gid` = grade.`gid`
+        ORDER BY student.`sId` DESC
+    </select>
+
+    <select id="findBySTel" resultType="com.etc.po.Student">
+        select * from student where sTel like '%${stel}%'
+    </select>
+
+    <select id="findBySId" resultType="com.etc.vo.StudentVO">
+        SELECT * FROM student,grade,class,major,college
+        WHERE student.`cid` = class.`cid` AND class.mid = major.`mid` AND major.`collid`=college.`collid`
+        AND Student.`gid` = grade.`gid` and student.sId=#{sId}
+    </select>
+
+    <select id="findBySName" resultType="com.etc.vo.StudentVO">
+        select * from student,class,grade where student.`cid`=class.`cid` AND student.`gid`=grade.`gid` and student.sName like '%${sName}%'
+    </select>
+
+
+    <select id="findByCId" resultType="com.etc.vo.StudentVO">
+        SELECT * FROM student,class,grade where student.`cid`=class.`cid` AND student.`gid`=grade.`gid` and class.cId=#{cId}
+    </select>
+
+    <select id="findByClassName" resultType="com.etc.vo.StudentVO">
+        SELECT * FROM student,class,grade where student.`cid`=class.`cid` AND student.`gid`=grade.`gid` AND class.className=#{className}
+    </select>
+
+    <select id="findByGId" resultType="com.etc.vo.StudentVO">
+        SELECT * FROM student,class,grade where student.`cid`=class.`cid` AND student.`gid`=grade.`gid` AND grade.gid=#{gId}
+    </select>
+
+    <select id="findByGName" resultType="com.etc.vo.StudentVO">
+        SELECT * FROM student,class,grade where student.`cid`=class.`cid` AND student.`gid`=grade.`gid` AND grade.gName=#{gName}
+    </select>
+
+    <select id="findByTelAndPass" resultType="com.etc.vo.StudentVO">
+        select * from student,class,grade where student.`cid`=class.`cid` AND student.`gid`=grade.`gid` and sTel=#{sTel} and sPass=#{sPass}
+    </select>
+
+    <select id="findBySIdAndPass" resultType="com.etc.vo.StudentVO">
+        select * from student,class,grade,major,college where student.`cid`=class.`cid` AND student.`gid`=grade.`gid` and sId=#{sId} and sPass=#{sPass} AND class.mid=major.mid AND major.collid=college.collid
+    </select>
+    <select id="findBySId2" resultType="com.etc.vo.StudentVO">
+         SELECT * FROM student,major,college,class WHERE student.cid=class.cid AND class.mid=major.mid AND major.collid=college.collid AND student.sid=#{sId}
+    </select>
+
+    <select id="findByEmail" resultType="com.etc.po.Student">
+        select * from student where sEmail like '%${sEmail}%'
+    </select>
+
+    <select id="findBySex" resultType="com.etc.po.Student">
+        select * from student where sex like '%${sex}%'
+    </select>
+
+    <insert id="addStudent">
+        insert into student(cId,gId,sName,sex,birthday,address,scode,sTel,sEmail,status,sState,sPhoto,roleId,sPass)
+        values (#{cId},#{gId},#{sName},#{sex},#{birthday},#{address},#{scode},#{sTel},#{sEmail},#{status},#{sState},#{sPhoto},#{roleId},#{sPass})
+    </insert>
+
+    <insert id="add">
+        insert into student(sName,sex,birthday,address,semail,sTel,status)
+        values (#{sName},#{sex},#{birthday},#{address},#{sEmail},#{sTel},#{status})
+    </insert>
+
+    <update id="updateStudent">
+        update student set cId=#{cId},gId=#{gId},sName=#{sName},sex=#{sex},birthday=#{birthday},address=#{address},scode=#{scode},sTel=#{sTel},sEmail=#{sEmail},status=#{status},sState=#{sState},sPhoto=#{sPhoto},roleId=#{roleId},sPass=#{sPass} where sId=#{sId}
+    </update>
+
+    <update id="editStudent">
+        update student set sName=#{sName},sex=#{sex},address=#{address},sTel=#{sTel},sEmail=#{sEmail},status=#{status},sPhoto=#{sPhoto} where sId=#{sId}
+    </update>
+
+    <update id="updateSState">
+        update student set sState=#{sState} where sId=#{sId}
+    </update>
+
+    <update id="updateSPass">
+        update student set sPass=#{sPass} where sId=#{sId}
+    </update>
+
+    <delete id="deleteStudent">
+        delete from student where sId=#{sId}
+    </delete>
+</mapper>

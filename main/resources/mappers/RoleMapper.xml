@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.RoleDao">
+    <select id="findAll" resultType="Role">
+        select * from `role`;
+    </select>
+
+    <select id="findById" resultType="Role">
+        select * from `role` where roleid = #{id}
+    </select>
+    <select id="findBySId" resultType="com.etc.vo.RecordVO">
+
+    </select>
+
+    <insert id="addRole">
+        insert into `role` (rolename) values (#{roleName});
+    </insert>
+
+    <delete id="deleteRole">
+        delete from `role` where roleid = #{id}
+    </delete>
+
+    <update id="updateRole">
+        update `role` set rolename = #{roleName}   where roleid = #{roleId};
+    </update>
+</mapper>

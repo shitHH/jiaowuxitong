@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.HomeworkDao">
+    <select id="selectAll" resultType="Homework">
+        select * from Homework
+    </select>
+
+    <select id="selectOne" resultType="Homework">
+        select * from Homework where homeid = #{homeid}
+    </select>
+
+    <select id="selectByCid" resultType="Homework">
+        select * from Homework where cid = #{cid}
+    </select>
+
+    <select id="selectByTid" resultType="Homework">
+        select * from Homework where tid = #{tid}
+    </select>
+
+    <insert id="add">
+        insert into Homework (cid,tid,homename) values (#{cid},#{tid},#{homework})
+    </insert>
+
+    <delete id="delete">
+        delete from Homework where homeid in
+        <foreach collection="array" item="addressid" open="(" separator="," close=")">
+            #{homeid}
+        </foreach>
+    </delete>
+
+    <update id="update">
+        update Homework set cid=#{cid},tid=#{tid},homename=#{homename} where homeid=#{homeid}
+    </update>
+</mapper>

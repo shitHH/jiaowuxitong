@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.DegreeapplyDao">
+    <select id="selectAll" resultType="com.etc.vo.DegreeapplyVO">
+        select * from Degreeapply,Student,class,grade,major,college,degree where Degreeapply.sid = Student.sid and
+        class.gid = grade.gid and Student.cid = class.cid and class.mid = major.mid and major.collid = college.collid and Degreeapply.degreeid = degree
+        .degreeid
+    </select>
+
+    <select id="selectone" resultType="com.etc.vo.DegreeapplyVO">
+        select * from Degreeapply,Student,class,grade,major,college,degree where Degreeapply.sid = Student.sid and
+        class.gid = grade.gid and Student.cid = class.cid and class.mid = major.mid and major.collid = college.collid and Degreeapply.degreeid = degree
+        .degreeid and Degreeapply.did = #{did}
+    </select>
+
+    <select id="selectBySid" resultType="com.etc.vo.DegreeapplyVO">
+        select * from Degreeapply,Student,class,grade,major,college,degree where Degreeapply.sid = Student.sid and
+        class.gid = grade.gid and Student.cid = class.cid and class.mid = major.mid and major.collid = college.collid and Degreeapply.degreeid = degree
+        .degreeid and Degreeapply.sid = #{sid}
+    </select>
+
+    <insert id="add">
+        insert into Degreeapply (sid,degreeid,dtype,ddate) values (#{sid},#{degreeid},#{dtype},#{ddate})
+    </insert>
+
+    <update id="update">
+        update Degreeapply set dtype = #{dtype} where did = #{did}
+    </update>
+</mapper>

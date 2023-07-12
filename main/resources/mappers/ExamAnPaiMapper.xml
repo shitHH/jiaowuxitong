@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.ExamAnPaiDao">
+    <select id="findAll" resultType="com.etc.vo.ExamAnPaiVo">
+        select * from examanpai,`time`,class,lession,teacher,classroom where examanpai.timeid =
+        `time`.timeid and examanpai.cid = class.cid and examanpai.lid = lession.lid and
+        examanpai.tid = teacher.tid and examanpai.classroomid = classroom.classroomid
+    </select>
+
+    <select id="findClassAll" resultType="com.etc.vo.ExamAnPaiVo">
+        select * from examanpai,`time`,class,lession,teacher,classroom where examanpai.cid = #{cid} and examanpai.timeid =
+        `time`.timeid and examanpai.cid = class.cid and examanpai.lid = lession.lid and
+        examanpai.tid = teacher.tid and examanpai.classroomid = classroom.classroomid
+    </select>
+
+    <select id="findByTid" resultType="com.etc.vo.ExamAnPaiVo">
+        select * from examanpai,`time`,class,lession,teacher,classroom where examanpai.tid = #{tid} and examanpai.timeid =
+        `time`.timeid and examanpai.cid = class.cid and examanpai.lid = lession.lid and
+        examanpai.tid = teacher.tid and examanpai.classroomid = classroom.classroomid
+    </select>
+
+    <insert id="addExamAnPai">
+        insert into examanpai (timeid,cid,lid,classroomid,tid,`date`) values (#{timeId},#{cId},#{lId},#{classroomId},#{tId},#{date});
+    </insert>
+
+    <delete id="deleteByeId">
+        delete from examanpai where eid in
+        <foreach collection="array" item="eId" open="(" separator="," close=")">
+            #{eId}
+        </foreach>
+    </delete>
+
+    <select id="findByClassroomId" resultType="com.etc.vo.ExamAnPaiVo">
+        select * from examanpai,`time`,class,lession,teacher,classroom where examanpai.classroomid = #{id} and examanpai.timeid =
+        `time`.timeid and examanpai.cid = class.cid and examanpai.lid = lession.lid and
+        examanpai.tid = teacher.tid and examanpai.classroomid = classroom.classroomid
+    </select>
+
+    <select id="findByClassroomIdAndDate" resultType="ExamAnPai">
+        select * from examanpai where classroomid = #{classroomId} and `date` = #{date};
+    </select>
+
+    <select id="findSame" resultType="ExamAnPai">
+    select * from examanpai where tid = #{tId} and timeid = #{timeId} and `date` = #{date}
+    </select>
+
+    <select id="findByLidAndcid" resultType="ExamAnPai">
+    select * from examanpai where lId = #{lId} and cId = #{cId}
+    </select>
+</mapper>

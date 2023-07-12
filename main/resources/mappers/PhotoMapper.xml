@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.PhotoDao">
+    <select id="findAll" resultType="Photo">
+         SELECT * FROM photo
+    </select>
+    <select id="findBypip" resultType="Photo">
+         SELECT * FROM photo where pip=#{pip} order by photoid desc
+    </select>
+    <insert id="photoinsert">
+         INSERT INTO photo(photosrc,photoname,phototype,ptname,pip) VALUES(#{photosrc},#{photoname},#{phototype},#{ptname},#{pip})
+    </insert>
+    <update id="photoupdate">
+         UPDATE photo SET photosrc=#{photosrc},photoname=#{photoname},phototype=#{phototype} WHERE photoid=#{photoid}
+    </update>
+    <select id="finBytype" resultType="Photo">
+        SELECT * FROM photo WHERE phototype=#{phototype} AND pip=#{pip}
+    </select>
+    <select id="findByPtname" resultType="Photo">
+        SELECT * FROM photo WHERE ptname=#{ptname}
+    </select>
+    <select id="findBynameandpip" resultType="Photo">
+        SELECT * FROM photo WHERE photo.`ptname`=#{ptname} AND photo.`pip`=#{pip}
+    </select>
+    <select id="findByphotoname" resultType="Photo">
+        SELECT * FROM photo WHERE photo.`photoname` LIKE '%${photoname}%' AND photo.`pip`=#{pip}
+    </select>
+    <update id="photoupdate1">
+        UPDATE photo SET pip=#{pip} WHERE photoid=#{photoid}
+    </update>
+</mapper>

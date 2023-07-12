@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.GradeDao">
+    <select id="findAll" resultType="Grade">
+        select * from Grade
+    </select>
+
+    <select id="findOne" resultType="Grade">
+        select * from Grade where gid = #{gid}
+    </select>
+
+    <insert id="add">
+        insert into Grade (gname) values (#{gname})
+    </insert>
+
+    <update id="update">
+        update Grade set gname = #{gname} where gid = #{gid}
+    </update>
+</mapper>

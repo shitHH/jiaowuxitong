@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.AppraiseDao">
+<!--    查询所有教评问题-->
+    <select id="findAllAp" resultType="Appraiseoption">
+        select * from appraiseoption
+    </select>
+
+<!--   通过教评id找教评-->
+  <select id="findbyId" resultType="Appraiseoption">
+     select * from appraiseoption where chooseid=#{chooseid}
+  </select>
+
+<!--    添加问题-->
+    <insert id="addOneAp" useGeneratedKeys="true" keyProperty="chooseid">
+        insert  into appraiseoption(content) value (#{content})
+    </insert>
+<!--    编辑问题-->
+    <update id="editOneAp">
+        update appraiseoption set content=#{content} where chooseid=#{chooseid}
+    </update>
+<!--    删除教评-->
+    <delete id="deleteOneAp">
+        delete from appraiseoption where chooseid=#{chooseid}
+    </delete>
+</mapper>

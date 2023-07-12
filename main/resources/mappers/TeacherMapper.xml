@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.etc.dao.TeacherDao">
+    <!--    查询所有教师-->
+    <select id="findAll" resultType="com.etc.vo.TeacherVO">
+        select * from teacher
+    </select>
+    <!--    根据教师编号查教师-->
+    <select id="findByTid" resultType="com.etc.vo.TeacherVO">
+        select * from  teacher,college,`role` where  teacher.tid=#{tid} and teacher.collid = college.collid and teacher.roleid = `role`.roleid
+    </select>
+   <!-- 根据教师姓名查询-->
+    <select id="findByName" resultType="com.etc.vo.TeacherVO">
+        select * from  teacher,college,`role` where teacher.collid = college.collid and teacher.roleid = `role`.roleid and teacher.`tname` like'%${tName}%'
+    </select>
+
+    <select id="findByTidAndTpass" resultType="com.etc.vo.TeacherVO">
+        select * from  teacher where tid=#{tid} and tpass=#{tpass}
+    </select>
+
+    <select id="findByRoleid" resultType="com.etc.vo.TeacherVO">
+        select * from  teacher where roleid=#{roleid}
+    </select>
+    <!--    根据学院编号查教师集合-->
+    <select id="findByCollid" resultType="com.etc.vo.TeacherVO">
+        select * from  teacher where  collid=#{collid}
+    </select>
+    <select id="findByTtel" resultType="com.etc.vo.TeacherVO">
+         select * from  teacher where ttel=#{ttel}
+    </select>
+    <select id="findByTemail" resultType="com.etc.vo.TeacherVO">
+         select * from  teacher where temail=#{temail}
+    </select>
+    <!--    添加教师-->
+    <insert id="addteacher" useGeneratedKeys="true" keyProperty="tid">
+    insert into teacher
+    (tid,collid,tName,tsex,tbirthday,taddress,status,tstate,ttel,temail,teducation,profession,tphoto,tpass)
+    value(#{tid},#{collid},#{tName},#{tsex},#{tbirthday},#{taddress},#{status},#{tstate},#{ttel},#{temail},#{teducation},#{profession},#{tphoto},#{tpass})
+    </insert>
+
+    <!--    修改教师信息-->
+    <update id="editteacher">
+        update teacher set
+        collid=#{collid},
+        temail=#{temail},
+        status=#{status},
+        ttel=#{ttel},
+        teducation=#{teducation},
+        profession=#{profession},
+        tstate=#{tstate},
+        tpass=#{tpass} where tid=#{tid}
+    </update>
+    <update id="updateState">
+        update teacher set tstate=#{tstate} where tid=#{tid}
+    </update>
+</mapper>

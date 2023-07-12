@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.LessionDao">
+    <select id="findAll" resultType="com.etc.vo.LessionTeacherVo">
+        SELECT * FROM lession,teacher where lession.tid = teacher.tid
+    </select>
+    <select id="findBylid" resultType="com.etc.vo.LessionTeacherVo">
+        SELECT * FROM lession,teacher where lession.tid = teacher.tid and lession.lid = #{lid}
+    </select>
+    <select id="findByid" resultType="Lession">
+         SELECT * FROM lession WHERE lid = #{lid}
+    </select>
+    <select id="findByTid" resultType="com.etc.vo.LessionTeacherVo">
+        SELECT * FROM lession,teacher WHERE lession.Tid = #{Tid} and lession.tid = teacher.tid
+    </select>
+
+    <select id="checkName" resultType="Lession">
+        select * from lession where lname = #{name}
+    </select>
+    <insert id="addLession">
+        insert into lession (tId,lName,lType,credit)values (#{tId},#{lName},#{lType},#{credit})
+    </insert>
+    <delete id="deleteLession">
+        delete from lession where lid =#{lId}
+    </delete>
+    <update id="updateLession">
+        update lession set tId = #{tId},lName = #{lName},lType = #{lType},credit = #{credit} where lId = #{lId}
+    </update>
+
+    <select id="findByName" resultType="com.etc.vo.LessionTeacherVo">
+        select * from lession where lName like '%${name}%'
+    </select>
+
+    <select id="findByLtype" resultType="com.etc.vo.LessionTeacherVo">
+         SELECT * FROM lession,teacher WHERE lession.tid = teacher.tid and ltype = #{ltype}
+    </select>
+</mapper>

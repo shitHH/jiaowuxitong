@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.ClassDao">
+    <select id="findAll" resultType="com.etc.vo.ClassVO">
+        select * from class,major,grade where class.mid = major.mid and class.gid = grade.gid order by class.cId desc
+    </select>
+
+    <select id="findByCId" resultType="com.etc.vo.ClassVO">
+        select * from class,major,grade where class.mid = major.mid and class.gid = grade.gid and class.cid=#{cid} order by cId desc
+    </select>
+
+    <select id="findByClassName" resultType="com.etc.vo.ClassVO">
+        select * from class,major,grade where class.mid = major.mid and class.gid = grade.gid and className like '%${className}%'
+    </select>
+
+    <select id="findByMId" resultType="com.etc.vo.ClassVO">
+        select * from class,major,grade where class.mid = major.mid and class.gid = grade.gid and class.mid=#{mid} order by cId desc
+    </select>
+
+    <select id="findByCid" resultType="Class">
+        select * from class where cid = #{cid}
+    </select>
+
+    <select id="findByMName" resultType="com.etc.vo.ClassVO">
+        SELECT * FROM class,major WHERE class.`mid`=major.`mid` AND major.`mName` like '%${mName}%'
+    </select>
+
+    <select id="findByGId" resultType="com.etc.vo.ClassVO">
+        select * from class,major,grade where class.mid = major.mid and class.gid = grade.gid and class.gid=#{gid} order by cId desc
+    </select>
+
+    <select id="findByGName" resultType="com.etc.vo.ClassVO">
+        SELECT * FROM class,grade WHERE class.`gid`=grade.`gid` AND grade.`gName`like '%${gName}%'
+    </select>
+
+    <select id="findByCState" resultType="com.etc.vo.ClassVO">
+        select * from class,major,grade where class.mid = major.mid and class.gid = grade.gid and class.cstate=#{cstate} order by cId desc
+    </select>
+
+    <insert id="addClass">
+        insert into class(mId,gId,className,cState)values (#{mId},#{gId},#{className},#{cState})
+    </insert>
+
+    <update id="updateClass">
+        update class set mId=#{mId},gId=#{gId},className=#{className},cState=#{cState} where cId=#{cId}
+    </update>
+
+    <delete id="deleteClass">
+        delete from class where cId=#{cId}
+    </delete>
+
+</mapper>

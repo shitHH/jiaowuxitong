@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.RecordDao">
+    <select id="findAll" resultType="com.etc.vo.RecordVO">
+        SELECT * FROM record,student,grade,class,major,college WHERE  record.`sid` = student.`sid` AND student.`cid` = class.`cid` AND class.mid = major.`mid` AND major.`collid` =
+           college.`collid` AND class.`gid` = grade.`gid` ORDER BY record.`mtime` DESC
+    </select>
+
+    <select id="findByMonId" resultType="com.etc.vo.RecordVO">
+        select * from record,student WHERE record.`sid`=student.`sid` and monId=#{monId}
+    </select>
+
+    <select id="findBySId" resultType="com.etc.vo.RecordVO">
+        SELECT * FROM
+         record,student,grade,class,major,college
+          WHERE
+           record.`sid` = student.`sid` AND student.`cid` = class.`cid` AND class.mid = major.`mid` AND major.`collid` =
+           college.`collid` AND class.`gid` = grade.`gid`
+           AND record.`sid` = #{sId}
+    </select>
+
+    <select id="findBySName" resultType="com.etc.vo.RecordVO">
+        SELECT * FROM record,student WHERE record.`sid`=student.`sid` AND student.`sName`=#{sName}
+    </select>
+
+    <select id="findByRstate" resultType="com.etc.vo.RecordVO">
+        SELECT * FROM record,student WHERE record.`sid`=student.`sid` AND record.`rState`=#{rState}
+    </select>
+
+    <select id="findByMTime" resultType="com.etc.vo.RecordVO">
+        select * from record where mTime=#{mTime}
+    </select>
+
+    <select id="findByMYear" resultType="com.etc.vo.RecordVO">
+        SELECT * FROM record,student WHERE record.`sid`=student.`sid` AND mYear=#{mYear}
+    </select>
+
+    <insert id="addRecord">
+        insert into record(sId,mTime,mYear)values (#{sId},#{mTime},#{mYear})
+    </insert>
+
+    <update id="updateRecord">
+        update record set sId=#{sId},mTime=#{mTime},mYear=#{mYear} where monId=#{monId}
+    </update>
+
+    <delete id="deleteRecord">
+        delete from record where monId=#{monId}
+    </delete>
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.ChooseclassDao">
+    <select id="selectAll" resultType="com.etc.vo.ChooseClassVO">
+        select ChooseClass.choid, ChooseClass.sid,ChooseClass.lid,Student.sname,lession.lname from ChooseClass,Student,lession where
+        ChooseClass.sid = student.sid and ChooseClass.lid = lession.lid
+    </select>
+
+    <select id="selectBysid" resultType="com.etc.vo.ChooseClassVO">
+        select ChooseClass.choid, ChooseClass.sid,ChooseClass.lid,Student.sname,lession.lname from ChooseClass,Student,lession where
+        ChooseClass.sid = student.sid and ChooseClass.lid = lession.lid and ChooseClass.sid = #{sid}
+    </select>
+
+    <select id="selectOne" resultType="com.etc.vo.ChooseClassVO">
+        select ChooseClass.choid, ChooseClass.sid,ChooseClass.lid,Student.sname,lession.lname from ChooseClass,Student,lession where
+        ChooseClass.sid = student.sid and ChooseClass.lid = lession.lid and ChooseClass.choid = #{choid}
+    </select>
+
+    <insert id="chooseClass">
+        insert into ChooseClass (sid,lid) values (#{sid},#{lid})
+    </insert>
+
+    <delete id="delete">
+        delete from ChooseClass where choid in
+        <foreach collection="array" item="choid" open="(" separator="," close=")">
+            #{choid}
+        </foreach>
+    </delete>
+
+    <update id="update">
+        update ChooseClass set sid = #{sid} , lid - #{lid} where choid = #{choid}
+    </update>
+</mapper>
